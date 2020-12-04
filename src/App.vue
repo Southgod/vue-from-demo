@@ -4,7 +4,7 @@
         <vuedraggable :group='{name: "menu", put: true}'>
             <a-button type="primary" @click="onClick();show('block','block','none','block')">输入框</a-button>
             <a-button type="primary" @click="onClick2();show('block','none','none','block')">列表</a-button>
-            <a-button type="primary" @click="onClick3();show('none','block','none','block')">文字</a-button>
+            <a-button type="primary" @click="onClick3();show('block','block','block','block')">文字</a-button>
         </vuedraggable>
     </div>
     <div style="width:900px;float:left;background-color: aliceblue;height: 800px" >
@@ -17,16 +17,16 @@
               <a-tabs default-active-key="1" @change="callback">
                   <a-tab-pane key="1" tab="属性栏">
                       <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.sizeshow}" >
-                          <a-input addon-before="字体大小" default-value="20"  />
+                          <a-input addon-before="字体大小" :default-value="charactersize" @pressEnter="sizechange"/>
                       </div>
                       <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.heightshow}">
-                          <a-input addon-before="宽度" default-value="20" />
+                          <a-input addon-before="宽度" :default-value="divheight" @pressEnter="heightchange"/>
                       </div>
                       <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.weightshow}">
-                          <a-input addon-before="长度" default-value="20" />
+                          <a-input addon-before="长度" :default-value="divweight" @pressEnter="weightchange"/>
                       </div>
                       <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.charactershow}">
-                          <a-input addon-before="文字内容" default-value="文字内容" />
+                          <a-input addon-before="文字内容" :default-value="content" @pressEnter="contentchange"/>
                       </div>
                   </a-tab-pane>
                   <a-tab-pane key="2" tab="Tab 2" force-render></a-tab-pane>
@@ -52,7 +52,10 @@
         vuedraggable,
     },data(){
           return{
-              formlist:[]
+              charactersize : this.$store.state.charactersize,
+              divheight : this.$store.state.divheight,
+              divweight : this.$store.state.divweight,
+              content : this.$store.state.content
           }
       },
       methods:{
@@ -96,7 +99,24 @@
               })
               instance.$mount()
               this.$refs.container.appendChild(instance.$el)
-          }
+          },
+          //控制组件属性
+          weightchange(e){
+              this.$store.commit('weightchange',e.target.value);
+              console.log(this.$store.state.divweight)
+          },
+          sizechange(e){
+              this.$store.commit('sizechange',e.target.value);
+              console.log(this.$store.state.charactersize)
+          },
+          heightchange(e){
+              this.$store.commit('heightchange',e.target.value);
+              console.log(this.$store.state.divheight)
+          },
+          contentchange(e){
+              this.$store.commit('contentchange',e.target.value);
+              console.log(this.$store.state.content)
+          },
       }
   }
 </script>

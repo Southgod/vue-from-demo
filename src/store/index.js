@@ -5,14 +5,19 @@ import Vuex from  'vuex'
 vue.use(Vuex)
 
 const store = new Vuex.Store({
-state:{
-    sizeshow:'none',
-    heightshow:'none',
-    weightshow:'none',
-    charactershow:'none',
-    marginbottom:'16px'
+    state:{
+        sizeshow:'none',
+        heightshow:'none',
+        weightshow:'none',
+        charactershow:'none',
+        marginbottom:'16px',
+        divweight:'500px',
+        content:'文字内容',
+        divheight:'30px',
+        charactersize:'20px'
 },
     mutations:{
+        //控制属性栏目出现消失
         changesizeshow(state,sizeshow){
             state.sizeshow = sizeshow
         },
@@ -24,8 +29,23 @@ state:{
         },
         changecharactershow(state,charactershow){
             state.charactershow = charactershow
+        },
+
+        //控制属性栏中值与组件属性绑定
+        weightchange(state,divweight){
+            state.divweight = divweight
+        },
+        sizechange(state, size){
+            state.charactersize =  size
+        },
+        heightchange(state,divheight){
+            state.divheight = divheight
+        },
+        contentchange(state,content){
+            state.content = content
         }
     }
 })
+
 
 export default store
