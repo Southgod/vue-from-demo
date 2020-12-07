@@ -1,28 +1,34 @@
 <template>
     <vuedraggable :group='{name: "menu", put: true}'>
-    <div @click="show('block','block','block','block')" class="buttonproperty" style=" border:1px solid #bfd1eb;background:#f3faff;padding:3px">
-        <a-button type="primary" block :style="{'height':divheight,'width':divweight}">
-            {{content}}
+    <div @click="show('block','block','block','block');changestate(1)" class="buttonproperty" style=" border:1px solid #bfd1eb;background:#f3faff;padding:3px">
+        <a-button type="primary" block :style="{'height':this.statelist[0].divheight,'width':this.statelist[0].divweight}">
+            {{this.statelist[0].divcontent}}
         </a-button>
     </div>
     </vuedraggable>
 </template>
 
 
-
 <script>
     import store from '@/store'
     import vuedraggable from 'vuedraggable';
+
+    let componentsstate = 0;
     export default {
         name: "characters",
         components:{
             vuedraggable
         },
-        data(){
+        data() {
             return{
-                divheight:store.state.divheight,
-                divcontent:'this.computed.content'
+                statelist : [{
+                    divheight:store.state.divheight,
+                    divcontent:store.state.content,
+                    charactersize:store.state.charactersize,
+                    divweight:store.state.divweight
+                }]
             }
+
         },
         methods:{
             //修改状态，控制当组件出现时出现相对应的属性选择框
@@ -31,6 +37,23 @@
                 store.commit("changeheightshow",heightshow);
                 store.commit("changeweightshow",weightshow);
                 store.commit("changecharactershow",charactershow);
+            },
+            changestate(changedstate){
+                componentsstate = changedstate;
+                if (componentsstate === 1 && this.statelist.length < 1){
+                    this.statelist.push({
+                        divheight:store.state.divheight,
+                        divcontent:this.content,
+                        charactersize:store.state.charactersize,
+                        divweight:store.state.divweight
+                    })
+                }else if (componentsstate === 1 && this.statelist.length >= 1) {
+                    this.statelist.splice(0,1,{
+                        divheight:store.state.divheight,
+                        divcontent:this.content,
+                        charactersize:store.state.charactersize,
+                        divweight:store.state.divweight})
+                }
             }
         },
         computed:{
@@ -38,7 +61,13 @@
                 return store.state.content;
             },
             divweight(){
-                return store.state.divweight
+                return this.statelist.filter(item => item.divweight);
+            },
+            charactersize(){
+                return this.statelist.filter(item => item.charactersize);
+            },
+            divheight(){
+                return this.statelist.filter(item => item.divheight);
             }
         }
     }
