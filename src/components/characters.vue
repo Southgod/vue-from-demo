@@ -1,6 +1,6 @@
 <template>
     <vuedraggable :group='{name: "menu", put: true}'>
-    <div @click="show('block','block','block','block');changestate(1)" class="buttonproperty" style=" border:1px solid #bfd1eb;background:#f3faff;padding:3px">
+    <div @click="show('block','block','block','block')" @dblclick="changestate(1)" class="buttonproperty" style=" border:1px solid #bfd1eb;background:#f3faff;padding:3px">
         <a-button type="primary" block :style="{'height':this.statelist[0].divheight,'width':this.statelist[0].divweight}">
             {{this.statelist[0].divcontent}}
         </a-button>
@@ -37,6 +37,13 @@
                 store.commit("changeheightshow",heightshow);
                 store.commit("changeweightshow",weightshow);
                 store.commit("changecharactershow",charactershow);
+            },
+            resetshow(){
+                store.commit('weightchange',this.statelist[0].divweight);
+                store.commit('sizechange',this.statelist[0].charactersize);
+                store.commit('heightchange',this.statelist[0].divheight);
+                store.commit('contentchange',this.statelist[0].divcontent);
+                console.log(this.statelist[0].divweight)
             },
             changestate(changedstate){
                 componentsstate = changedstate;

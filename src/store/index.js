@@ -10,11 +10,13 @@ const store = new Vuex.Store({
         heightshow:'none',
         weightshow:'none',
         charactershow:'none',
+        latticeshow:'none',
         marginbottom:'16px',
         divweight:'500px',
         content:'文字内容',
         divheight:'30px',
-        charactersize:'20px'
+        charactersize:'20px',
+        latticenum:2
 },
     mutations:{
         //控制属性栏目出现消失
@@ -30,6 +32,9 @@ const store = new Vuex.Store({
         changecharactershow(state,charactershow){
             state.charactershow = charactershow
         },
+        changelatticeshow(state,latticeshow){
+            state.latticeshow = latticeshow
+        },
 
         //控制属性栏中值与组件属性绑定
         weightchange(state,divweight){
@@ -43,6 +48,9 @@ const store = new Vuex.Store({
         },
         contentchange(state,content){
             state.content = content
+        },
+        latticechange(state,latticenum){
+            state.latticenum = latticenum
         }
     }
 })
