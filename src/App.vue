@@ -1,57 +1,66 @@
 <template>
-  <div id="app" style="width:1500px;">
-    <div  style="width:300px;float:left;background-color: azure;height: 800px">
+    <a-layout >
+        <a-layout-header >
+            <p :style="{ color: '#fff' }">自定义可拖曳表单</p>
+        </a-layout-header>
+        <a-layout>
+            <a-layout-sider width="220" style="background: #fff">
+                <div style="padding:5px 5px">
         <vuedraggable :group='{name: "menu", put: true}'>
-            <a-button type="primary" @click="onClick();show('block','block','none','block','none','none','none','none','none','none','none','none','none','none')">输入框</a-button>
-            <a-button type="primary" @click="onClick2();show('block','none','none','block','none','none','none','none','none','none','none','none','none','none')">列表</a-button>
-            <a-button type="primary" @click="onClick3();show('block','block','block','block','none','none','none','none','none','none','none','none','none','none')">文字</a-button>
-            <a-button type="primary" @click="onClick4();show('none','none','none','none','block','none','none','none','none','none','none','none','none','none')">布局</a-button>
-            <a-button type="primary" @click="onClick5();show('none','none','none','none','none','block','block','block','block','none','none','none','none','none')">表格布局</a-button>
-            <a-button type="primary" @click="onClick6();show('none','none','none','none','none','none','none','none','none','block','block','block','block','block')">网格布局</a-button>
-
+            <a-button block @click="onClick();show('block','block','none','block','none','none','none','none','none','none','none','none','none','none')">输入框</a-button>
+            <a-button block @click="onClick2();show('block','none','none','block','none','none','none','none','none','none','none','none','none','none')">列表</a-button>
+            <a-button block @click="onClick3();show('block','block','block','block','none','none','none','none','none','none','none','none','none','none')">文字</a-button>
+            <a-button block @click="onClick4();show('none','none','none','none','block','none','none','none','none','none','none','none','none','none')">布局</a-button>
+            <a-button block @click="onClick5();show('none','none','none','none','none','block','block','block','block','none','none','none','none','none')">表格布局</a-button>
+            <a-button block @click="onClick6();show('none','none','none','none','none','none','none','none','none','block','block','block','block','block')">网格布局</a-button>
         </vuedraggable>
-    </div>
-    <div style="width:900px;float:left;background-color: aliceblue;height: 800px" >
-        <vuedraggable :group='{name: "menu", put: true}'>
+                </div>
+            </a-layout-sider>
+            <a-layout style="padding: 0 24px 24px">
+                <a-breadcrumb style="margin: 16px 0">
+                </a-breadcrumb>
+                <a-layout-content :style="{ background: '#fff', padding: '12px', margin: 0, minHeight: '600px' }">
+                <vuedraggable :group='{name: "menu", put: true}'>
             <div ref="container"></div>
         </vuedraggable>
-    </div>
-      <div style="width:300px;float:left;background-color:azure;height: 800px" >
-          <div>
-              <a-tabs default-active-key="1" @change="callback">
+                </a-layout-content>
+            </a-layout>
+            <a-layout-sider width="350" style="background: #fff">
+                <a-menu :style="{ height: '100%', borderRight: 0 }">
+                <a-tabs default-active-key="1" @change="callback">
                   <a-tab-pane key="1" tab="属性栏">
-                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.sizeshow}" >
+                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.sizeshow}" style="padding: 0px 5px">
                           <a-input addon-before="字体大小" :default-value="charactersize" @pressEnter="sizechange"/>
                       </div>
-                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.heightshow}">
+                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.heightshow}" style="padding: 0px 5px">
                           <a-input addon-before="宽度" :default-value="divheight" @pressEnter="heightchange"/>
                       </div>
-                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.weightshow}">
+                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.weightshow}" style="padding: 0px 5px">
                           <a-input addon-before="长度" :default-value="divweight" @pressEnter="weightchange"/>
                       </div>
-                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.charactershow}">
+                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.charactershow}" style="padding: 0px 5px">
                           <a-input addon-before="文字内容" :default-value="content" @pressEnter="contentchange"/>
                       </div>
-                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.latticeshow}">
+                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.latticeshow}" style="padding: 0px 5px">
                           <a-input addon-before="布局格数" :default-value="latticenum" @pressEnter="latticechange"/>
                       </div>
-                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.theadshow}">
+                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.theadshow}" style="padding: 0px 5px">
                           <a-input addon-before="选择表头" :default-value="thead" @pressEnter="theadchange"/>
                       </div>
-                      <div>
-                      <a-select default-value="行" style="width: 120px" @change="selectvaluechange" :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.selectshow}">
+                      <div style="padding: 0px 5px">
+                      <a-select default-value="行" style="width: 120px" @change="selectvaluechange" :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.selectshow}" >
                           <a-select-option value="row">行</a-select-option>
                           <a-select-option value="col">列</a-select-option>
                       </a-select>
                       </div>
-                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.trankshow}">
+                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.trankshow}" style="padding: 0px 5px">
                           <a-input addon-before="选择行列" :default-value="trank" @pressEnter="trankchange"/>
                       </div>
-                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.rcnumbershow}">
+                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.rcnumbershow}" style="padding: 0px 5px">
                           <a-input addon-before="合并行列数" :default-value="rcnumber" @pressEnter="rcnumberchange"/>
                       </div>
-                      <div>
-                          <a-select default-value="格1" style="width: 120px" @change="gridvaluechange" :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.gridrankshow}">
+                      <div style="padding: 0px 5px">
+                          <a-select default-value="格1" style="width: 120px" @change="gridvaluechange" :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.gridrankshow}" >
                               <a-select-option value="1">格1</a-select-option>
                               <a-select-option value="2">格2</a-select-option>
                               <a-select-option value="3">格3</a-select-option>
@@ -72,33 +81,32 @@
                               <a-select-option value="18">格18</a-select-option>
                           </a-select>
                       </div>
-                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.rowstartshow}">
+                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.rowstartshow} " style="padding: 0px 5px">
                           <a-input addon-before="行开始" :default-value="rowstart" @pressEnter="rowstartchange"/>
                       </div>
-                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.rowendshow}">
+                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.rowendshow}" style="padding: 0px 5px">
                           <a-input addon-before="行结束" :default-value="rowend" @pressEnter="rowendchange"/>
                       </div>
-                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.columnstartshow}">
+                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.columnstartshow}" style="padding: 0px 5px">
                           <a-input addon-before="列开始" :default-value="columnstart" @pressEnter="columnstartchange"/>
                       </div>
-                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.columnendshow}">
+                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.columnendshow}" style="padding: 0px 5px">
                           <a-input addon-before="列结束" :default-value="columnend" @pressEnter="columnendchange"/>
                       </div>
-                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.columnendshow}">
+                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.columnendshow}" style="padding: 0px 5px">
                           <a-input addon-before="总体长度" :default-value="gridtemplatecolumns" @pressEnter="gridtemplatecolumnschange"/>
                       </div>
-                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.columnendshow}">
+                      <div :style="{'margin-bottom':$store.state.marginbottom,'display':$store.state.columnendshow}" style="padding: 0px 5px">
                           <a-input addon-before="总体宽度" :default-value="gridtemplaterows" @pressEnter="gridtemplaterowschange"/>
                       </div>
                   </a-tab-pane>
                   <a-tab-pane key="2" tab="Tab 2" force-render></a-tab-pane>
                   <a-tab-pane key="3" tab="Tab 3"></a-tab-pane>
               </a-tabs>
-          </div>
-      <div id="showAttribbute" @showattribbute="showattribbute()">
-      </div>
-      </div>
-  </div>
+                </a-menu>
+            </a-layout-sider>
+        </a-layout>
+    </a-layout>
 </template>
 
 <script>
@@ -110,6 +118,7 @@
   import layout from './components/layout';
   import table from './components/table';
   import grid from './components/grid';
+
 
   export default {
     name: 'app',
@@ -130,8 +139,10 @@
               rowstart :this.$store.state.rowstart,
               rowend :this.$store.state.rowend,
               gridtemplatecolumns :this.$store.state.gridtemplatecolumns,
-              gridtemplaterows :this.$store.state.gridtemplaterows
+              gridtemplaterows :this.$store.state.gridtemplaterows,
+              padding : '3px'
           }
+
       },
       methods:{
           callback(key) {
